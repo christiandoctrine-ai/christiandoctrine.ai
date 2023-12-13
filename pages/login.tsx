@@ -30,17 +30,16 @@ export default function Example() {
                 {session ? (
                   <p>Signed in as {session?.user?.name}</p>
                 ) : (
-                  <p>Christiandoctrine-chatbot</p>
+                  <p>christiandoctrine.ai</p>
                 )}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-white">
                 {' '}
                 {/* Responsive font-size */}
-                Have a conversation with your documents
+                Making the bible and theology more accessible
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                In your documents, ask questions and receive relevant answers.
-                Keep multiple chats, windows, and conversations in one location.
+                Sign in to ask questions and let AI help you learn about theology with cited sources!
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-6 sm:gap-y-0">
                 {session ? (
