@@ -1,0 +1,6 @@
+langchain==0.0.172
+pinecone-client==2.2.1
+tabulate==0.8.7
+pymongo==4.3.3
+openai==0.27.6
+unstructured[local-inference]
