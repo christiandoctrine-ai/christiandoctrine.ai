@@ -3,14 +3,20 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Navbar from '@/components/other/Navbar';
+import Head from 'next/head';
 
 export default function Example() {
   const router = useRouter();
   const { data: session } = useSession();
 
   return (
-    <div className="bg-gray-900 ">
-      <div className="relative isolate pt-14">
+    <div className="bg-gray-900 isolate">
+      <Head>
+        <title>Login</title>
+      </Head>
+      <Navbar />
+      <div className="relative  pt-14">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -39,7 +45,8 @@ export default function Example() {
                 Making the bible and theology more accessible
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                Sign in to ask questions and let AI help you learn about theology with cited sources!
+                Sign in to ask questions and let AI help you learn about
+                theology with cited sources!
               </p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-6 sm:gap-y-0">
                 {session ? (

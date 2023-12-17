@@ -11,7 +11,7 @@ export default function Settings() {
   const [message, setMessage] = useState<string>('');
   const [uploadMessage, setUploadMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const [namespaces, setNamespaces] = useState<string[]>([]);
+  const [namespaces, setNamespaces] = useState<string[]>(['test']);
   const router = useRouter();
 
   const { data: session, status } = useSession({
@@ -20,34 +20,40 @@ export default function Settings() {
   });
   const userEmail = session?.user?.email;
 
+  const { getRootProps, getInputProps, open, isDragAccept, isDragReject } =
+    useDropzone({
+      noClick: true,
+      noKeyboard: true,
+      onDrop: (acceptedFiles: File[], fileRejections) => {
+        const filteredFiles = acceptedFiles.filter(
+          (file) =>
+            file.type === 'application/pdf' ||
+            file.type === 'text/plain' ||
+            file.type ===
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+            file.type === 'text/csv',
+        );
 
-  const { getRootProps, getInputProps, open, isDragAccept, isDragReject } = useDropzone({
-    noClick: true,
-    noKeyboard: true,
-    onDrop: (acceptedFiles: File[], fileRejections) => {
-      const filteredFiles = acceptedFiles.filter(file => 
-        file.type === 'application/pdf' ||
-        file.type === 'text/plain' ||
-        file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
-        file.type === 'text/csv'
-      );
-  
-      setSelectedFiles(filteredFiles);
-  
-      if (fileRejections.length > 0 || filteredFiles.length !== acceptedFiles.length) {
-        setError('Some files were not accepted. Please upload only .pdf, .txt, .docx, or .csv files.');
-      }
-    },
-    multiple: true,
-    accept: [
-      'application/pdf',
-      'text/plain',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/csv'
-    ] as any
-  });
-  
-  
+        setSelectedFiles(filteredFiles);
+
+        if (
+          fileRejections.length > 0 ||
+          filteredFiles.length !== acceptedFiles.length
+        ) {
+          setError(
+            'Some files were not accepted. Please upload only .pdf, .txt, .docx, or .csv files.',
+          );
+        }
+      },
+      multiple: true,
+      accept: [
+        'application/pdf',
+        'text/plain',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'text/csv',
+      ] as any,
+    });
+
   const handleUpload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) return;
 
@@ -226,7 +232,9 @@ export default function Settings() {
               many as you like, and they can be used to organize your data.
             </p>
             <div
-              className={`mt-4 sm:mt-8 flex justify-center ${isDragAccept ? 'border-green-500' : ''} ${isDragReject ? 'border-red-500' : ''}`}
+              className={`mt-4 sm:mt-8 flex justify-center ${
+                isDragAccept ? 'border-green-500' : ''
+              } ${isDragReject ? 'border-red-500' : ''}`}
               {...getRootProps()}
             >
               <label className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-6 sm:p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer">
@@ -248,9 +256,11 @@ export default function Settings() {
                 <span className="mt-2 sm:mt-2 block text-xs sm:text-sm font-semibold text-gray-100">
                   {isDragAccept && 'All files will be accepted'}
                   {isDragReject && 'Some files will be rejected'}
-                  {!isDragAccept && !isDragReject && (selectedFiles.length > 0
-                    ? selectedFiles.map((file) => file.name).join(', ')
-                    : 'Drag and drop or click to select files to upload')}
+                  {!isDragAccept &&
+                    !isDragReject &&
+                    (selectedFiles.length > 0
+                      ? selectedFiles.map((file) => file.name).join(', ')
+                      : 'Drag and drop or click to select files to upload')}
                 </span>
               </label>
             </div>

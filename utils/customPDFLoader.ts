@@ -35,6 +35,9 @@ export class CustomPDFLoader extends BufferLoader {
   ): Promise<Document[]> {
     const { pdf } = await PDFLoaderImports();
     const parsed = await pdf(raw);
+    const year = parsed?.info?.CreationDate.substring(2, 6);
+
+    console.log(parsed);
 
     return [
       new Document({
@@ -42,6 +45,11 @@ export class CustomPDFLoader extends BufferLoader {
         metadata: {
           ...metadata,
           pdf_numpages: parsed.numpages,
+          author: parsed?.info?.Title,
+          year: year,
+          title: parsed?.info?.Title,
+          publisher: parsed?.info?.Producer,
+          page: parsed?.numpages,
         },
       }),
     ];

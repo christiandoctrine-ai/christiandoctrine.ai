@@ -19,6 +19,10 @@ Question: {question}
 
 Always quote the part of the document relevant to its answer.
 
+Never mention the word document when quoting something.
+
+Make sure to mention that your're showing verses when asked about that as Here are some verses about the asked topic.
+
 Answer in markdown. Be concise, follow the instructions in the question to the letter. Answer:`;
 
 // Creates a ConversationalRetrievalQAChain object that uses an OpenAI model and a PineconeStore vectorstore
@@ -31,7 +35,7 @@ export const makeChain = (
   const model = new OpenAI({
     temperature: modelTemperature, // increase temperature to get more creative answers
     modelName: 'gpt-3.5-turbo-16k',
-    maxTokens: 4096
+    maxTokens: 4096,
   });
 
   // Configures the chain to use the QA_PROMPT and CONDENSE_PROMPT prompts and to not return the source documents

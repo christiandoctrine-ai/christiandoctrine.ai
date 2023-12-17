@@ -22,6 +22,7 @@ import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import ListOfChats from '@/components/sidebar/ListOfChats';
 import ProfileDropdown from '@/components/other/ProfileDropdown';
 import { Message } from '@/types';
+import Head from 'next/head';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -89,7 +90,12 @@ export default function Home() {
         pageContent: doc.pageContent,
         metadata: {
           source: doc.metadata.source,
-          page_number: doc.metadata.page_number,
+          page_number: doc.metadata.page,
+          author: doc.metadata.author,
+          year: doc.metadata?.creationDate?.substring(2, 6),
+          title: doc.metadata.title,
+          publisher: doc.metadata.producer,
+          page: doc.metadata.page,
         },
       })),
     };
@@ -252,6 +258,10 @@ export default function Home() {
         <LoadingState />
       ) : (
         <div>
+          <Head>
+            <title>Home</title>
+          </Head>
+
           <Transition.Root show={sidebarOpen} as={Fragment}>
             <Dialog
               as="div"
@@ -334,6 +344,9 @@ export default function Home() {
                                     />
                                     New chat
                                   </button>
+                                  <i className="italic m-0 p-0 text-gray-400 text-xs">
+                                    * Create a new chat to cover a new topic
+                                  </i>
                                 </div>
                               }
 
@@ -361,7 +374,6 @@ export default function Home() {
               </div>
             </Dialog>
           </Transition.Root>
-
           {/* Static sidebar for desktop */}
           <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
             {/* Sidebar component, swap this element with another sidebar if you like */}
@@ -379,7 +391,7 @@ export default function Home() {
 
                         <button
                           type="button"
-                          className="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full mb-8"
+                          className="inline-flex items-center gap-x-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full "
                           onClick={async () => {
                             const newChatId = await createChat();
                             setChatId(newChatId);
@@ -387,15 +399,17 @@ export default function Home() {
                           }}
                         >
                           <PlusCircleIcon
-                            className="-ml-0.5 h-5 w-5"
+                            className="-ml-0.5 m-0 p-0 h-5 w-5"
                             aria-hidden="true"
                           />
                           New chat
                         </button>
+                        <i className="italic m-0 p-0 text-gray-400 text-xs">
+                          * Create a new chat to cover a new topic
+                        </i>
                       </div>
                     }
 
-                    {/*  */}
                     {/* desktop */}
                     <ListOfChats
                       chatList={chatList}
@@ -417,7 +431,6 @@ export default function Home() {
               </nav>
             </div>
           </div>
-
           <div className="lg:pl-72">
             <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-800 bg-gray-900 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
               <button
@@ -436,8 +449,8 @@ export default function Home() {
               />
 
               <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 items-center">
-                <span className="w-full text-center items-center rounded-md bg-blue-400/10 px-2 py-1 text-xs sm:text-sm md:text-md md:text-lg font-medium text-blue-400 ring-1 ring-inset ring-pink-blue/30">
-                  Christiandoctrine.ai
+                <span className="w-full text-center items-center rounded-md px-2 py-1 text-xs sm:text-sm md:text-md md:text-lg font-medium">
+                  {/* Christiandoctrine.ai */}
                 </span>
 
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
@@ -455,7 +468,7 @@ export default function Home() {
               </div>
             </div>
 
-            <main className="flex flex-col h-full justify-between">
+            <main className="flex flex-col h-[92vh] justify-between">
               {nameSpaceHasChats ? (
                 <>
                   <div className="overflow-y-auto">
@@ -484,15 +497,12 @@ export default function Home() {
                 <>
                   <div className="flex flex-col items-center justify-center align-center h-screen px-4">
                     <h1 className="text-xl md:text-3xl text-center font-semibold text-gray-100">
-                      Welcome to the chatbot
+                      Welcome to the{' '}
+                      <span className="text-blue-500 underline">
+                        christiandoctrine.ai
+                      </span>
+                      !
                     </h1>
-                    {/* <p className="text-md md:text-xl text-center text-gray-100 mt-4">
-                      {!nameSpaceHasChats 
-                        ? 'You have no chats in this namespace. Create a new chat to get started.'
-                        : !selectedNamespace
-                        ? 'Select a namespace to display chats'
-                        : 'You have no chats. Create a new chat to get started.'}
-                    </p> */}
                   </div>
                 </>
               )}

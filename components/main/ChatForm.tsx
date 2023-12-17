@@ -66,7 +66,7 @@ const ChatForm = ({
               ? 'Waiting for response...'
               : error
               ? 'Error occurred. Try again.'
-              : 'Your message...'
+              : 'Ask a question about theology like, “What does TULIP stand for?”'
           }
           value={query}
           onChange={(e) => setQuery(e.target.value)}
