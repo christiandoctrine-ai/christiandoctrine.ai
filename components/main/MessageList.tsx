@@ -34,10 +34,7 @@ function MessageList({
           {messages.length == 0 ? (
             <div className="my-12">
               <h1 className="text-xl md:text-3xl text-center font-semibold text-gray-100">
-                Welcome to the{' '}
-                <span className="text-blue-500 underline">
-                  christiandoctrine.ai
-                </span>
+                Welcome to the christiandoctrine.ai
               </h1>
             </div>
           ) : (

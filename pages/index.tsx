@@ -487,11 +487,7 @@ export default function Home() {
                 <>
                   <div className="flex flex-col items-center justify-center align-center h-screen px-4">
                     <h1 className="text-xl md:text-3xl text-center font-semibold text-gray-100">
-                      Welcome to the{' '}
-                      <span className="text-blue-500 underline">
-                        christiandoctrine.ai
-                      </span>
-                      !
+                      Welcome to the christiandoctrine.ai !
                     </h1>
                   </div>
                 </>

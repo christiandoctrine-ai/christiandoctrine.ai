@@ -9,55 +9,48 @@ export default function About() {
         <title>About Us</title>
       </Head>
       <Navbar />
+      <div className="relative isolate min-h-screen bg-gray-900 flex justify-center">
+        <div className="mx-auto flex justify-center max-w-7xl ">
+          <div className="relative px-6 pb-20 pt-24  sm:pt-32 lg:static lg:px-8 lg:py-48">
+            <h2 className="text-xl text-center sm:text-3xl sm:text-left font-bold text-white">
+              About christiandoctrine.ai
+            </h2>
 
-      <div className="flex flex-col h-[90vh] items-center justify-center p-8 text-white">
-        <h1 className="text-3xl text-white text-center font-bold mb-12">
-          About{' '}
-          <span className="text-blue-500 underline">christiandoctrine.ai</span>
-        </h1>
-        <div className="ring-1 ring-inset ring-pink-blue/30 rounded-md p-5">
-          <div className="max-w-3xl mx-auto p-6">
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <p className="text-lg">
-                  • Exploring theology and the Bible through cutting-edge
-                  technology
-                </p>
-              </div>
-              <div className="flex items-center">
-                <p className="text-lg">
-                  • Utilizing advanced natural language processing for
-                  comprehensive insights
-                </p>
-              </div>
-              <div className="flex items-center">
-                <p className="text-lg">
-                  • Dedicated to providing accurate and accessible information
-                </p>
-              </div>
-              <div className="flex items-center">
-                <p className="text-lg">
-                  • Creating an engaging space for theological exploration
-                </p>
-              </div>
-              <div className="flex items-center">
-                <p className="text-lg">
-                  • Empowering curious minds and dedicated scholars alike
-                </p>
-              </div>
+            <div className="sm:mt-6 text-sm sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
+              Our vision is to make the bible and theology more accessible in
+              order to facilitate vibrant discussions within church communities.
+              This AI chatbot is in beta and should not be viewed as an
+              authoritative source.
             </div>
-          </div>{' '}
-        </div>
-        <h1 className="text-3xl text-white text-center font-bold my-12">
-          Contact Us
-        </h1>
-        <div className="ring-1 ring-inset ring-pink-blue/30 rounded-md p-5">
-          <a href="https://forms.gle/qiatmBPU9QJzBbBP9">
-            👉{' '}
-            <span className="hover:text-blue-500 underline font-bold">
-              Fill out this form
-            </span>
-          </a>
+
+            <h2 className="mt-24 text-xl text-center sm:text-3xl sm:text-left font-bold text-white">
+              Sources
+            </h2>
+            <ul>
+              <li className="ml-5 text-xs underline sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
+                <a
+                  target="_blank"
+                  href="https://drive.google.com/file/d/1Y6_IIkNdQhnBMBDzwo1aHnmmEk6C5893/view?usp=drive_link"
+                >
+                  • Systematic Theology by Wayne Grudem (1994)
+                </a>
+              </li>
+              <li className="ml-5 text-xs underline sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
+                <a
+                  target="_blank"
+                  href="https://drive.google.com/file/d/1Yv2R5JDfjT2coUVHuBgfM_uBa_m9WpyQ/view?usp=drive_link"
+                >
+                  • World English Bible
+                </a>
+              </li>
+            </ul>
+
+            <a target="_blank" href="https://forms.gle/qiatmBPU9QJzBbBP9">
+              <button className="mt-5 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
+                Contact Us
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>

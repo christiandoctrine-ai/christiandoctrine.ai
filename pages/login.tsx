@@ -15,7 +15,7 @@ export default function Example() {
       <Head>
         <title>Login</title>
       </Head>
-      <Navbar />
+      <Navbar about={false} />
       <div className="relative  pt-14">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -32,13 +32,14 @@ export default function Example() {
         <div className="py-24 sm:py-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20 mb-2">
-                {session ? (
-                  <p>Signed in as {session?.user?.name}</p>
-                ) : (
-                  <p>christiandoctrine.ai</p>
-                )}
-              </span>
+              {session ? (
+                <span className="inline-flex rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20 mb-2">
+                  Signed in as {session?.user?.name}
+                </span>
+              ) : (
+                ''
+              )}
+
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-white">
                 {' '}
                 {/* Responsive font-size */}
