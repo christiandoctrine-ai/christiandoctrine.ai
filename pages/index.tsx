@@ -10,13 +10,8 @@ import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react';
 import LoadingState from '@/components/other/LoadingState';
 import { Dialog, Transition } from '@headlessui/react';
-import { Switch } from '@headlessui/react';
 
-import {
-  Bars3Icon,
-  Cog6ToothIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { PlusCircleIcon } from '@heroicons/react/20/solid';
 import ListOfChats from '@/components/sidebar/ListOfChats';
@@ -24,13 +19,8 @@ import ProfileDropdown from '@/components/other/ProfileDropdown';
 import { Message } from '@/types';
 import Head from 'next/head';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-  const [enabled, setEnabled] = useState<boolean>(true);
 
   const router = useRouter();
   const [query, setQuery] = useState<string>('');

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import { ChevronDoubleDownIcon } from '@heroicons/react/20/solid';
+import Link from 'next/link';
 
 const ProfileDropdown = ({
   userName,
@@ -47,14 +48,21 @@ const ProfileDropdown = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-gray-800 hover:bg-gray-800/90 py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+        <Menu.Items className="absolute   right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-gray-800 hover:bg-gray-800/90 py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
           <Menu.Item>
             <button
               onClick={signOut}
-              className="block px-3 py-1 w-full text-sm leading-6 text-gray-100"
+              className="block text-left px-3 py-1 w-full text-sm leading-6 text-gray-100"
             >
               Sign out
             </button>
+          </Menu.Item>
+          <Menu.Item>
+            <Link href={'/delete'}>
+              <button className="block text-left px-3 py-1 w-full text-sm leading-6 text-gray-100">
+                Delete account
+              </button>
+            </Link>
           </Menu.Item>
         </Menu.Items>
       </Transition>
