@@ -1,6 +1,8 @@
 import { Document } from 'langchain/document';
 import { readFile } from 'fs/promises';
 import { BaseDocumentLoader } from 'langchain/document_loaders';
+import * as fs from 'fs/promises';
+import path from 'path';
 
 export abstract class BufferLoader extends BaseDocumentLoader {
   constructor(public filePathOrBlob: string | Blob) {
@@ -37,22 +39,39 @@ export class CustomPDFLoader extends BufferLoader {
     const parsed = await pdf(raw);
     const year = parsed?.info?.CreationDate.substring(2, 6);
 
-    console.log(parsed);
+    let bibleDocument = new Document();
+    let otherDocumentObjects: any = new Document({});
+    console.log(parsed?.info?.Title);
 
-    return [
-      new Document({
+    if (!parsed?.info?.Title.includes('bible')) {
+      otherDocumentObjects = new Document({
+        pageContent: parsed.text,
+        metadata: {
+          // Set the source as the file path
+          pdf_numpages: parsed.numpages,
+          author: parsed?.info?.Title,
+          year: year,
+          title: parsed?.info?.Author,
+          publisher: parsed?.info?.Producer,
+          page: parsed?.numpages,
+        },
+      });
+    } else {
+      bibleDocument = new Document({
         pageContent: parsed.text,
         metadata: {
           ...metadata,
           pdf_numpages: parsed.numpages,
           author: parsed?.info?.Title,
           year: year,
-          title: parsed?.info?.Title,
+          title: parsed?.info?.Author,
           publisher: parsed?.info?.Producer,
           page: parsed?.numpages,
         },
-      }),
-    ];
+      });
+    }
+
+    return [bibleDocument, otherDocumentObjects];
   }
 }
 

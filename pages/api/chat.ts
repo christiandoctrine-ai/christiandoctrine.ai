@@ -68,14 +68,16 @@ export default async function handler(
       chat_history: history || [],
     });
 
+    // console.log('RESPONSE DATA: ', response);
+
     const botMessage = new Message({
       sender: 'bot',
-      content: response.text.toString(),
+      content: response[1].text.toString(),
       chatId: chatId,
       namespace: 'namespace',
       userEmail: userEmail,
-      sourceDocs: response.sourceDocuments
-        ? response.sourceDocuments.map((doc: SourceDoc) => ({
+      sourceDocs: response[0]
+        ? response[0].map((doc: SourceDoc) => ({
             pageContent: doc.pageContent,
             metadata: { source: doc.metadata.source },
           }))
@@ -84,9 +86,10 @@ export default async function handler(
 
     await botMessage.save();
 
-    res
-      .status(200)
-      .json({ text: response.text, sourceDocuments: response.sourceDocuments });
+    res.status(200).json({
+      text: response[1].text,
+      sourceDocuments: response[0],
+    });
   } catch (error: any) {
     console.log('error', error);
     res.status(500).json({ error: error.message || 'Something went wrong' });

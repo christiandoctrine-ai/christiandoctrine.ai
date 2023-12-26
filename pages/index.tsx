@@ -18,6 +18,7 @@ import ListOfChats from '@/components/sidebar/ListOfChats';
 import ProfileDropdown from '@/components/other/ProfileDropdown';
 import { Message } from '@/types';
 import Head from 'next/head';
+import Slider from '@/components/sidebar/Slider';
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -30,11 +31,11 @@ export default function Home() {
     required: true,
     onUnauthenticated: () => router.push('/login'),
   });
-  let lsvalue: any;
-  if (typeof window !== 'undefined') {
-    lsvalue = 2; //localStorage.getItem('sourceNumber');
-  }
-  const [sourceNumber, setSourceNumber] = useState(Number(lsvalue) || 6);
+  // let lsvalue: any;
+  // if (typeof window !== 'undefined') {
+  //   lsvalue = 6; //localStorage.getItem('sourceNumber');
+  // }
+  const [sourceNumber, setSourceNumber] = useState(6);
   const [returnSourceDocuments, setReturnSourceDocuments] =
     useState<boolean>(true);
   const [modelTemperature, setModelTemperature] = useState<number>(0.1);
@@ -370,7 +371,7 @@ export default function Home() {
             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 border-r border-gray-800">
               <div className="flex h-16 shrink-0 items-center"></div>
               <nav className="flex flex-1 flex-col">
-                {/* <Slider setSourceNumber={setSourceNumber} /> */}
+                <Slider setSourceNumber={setSourceNumber} />
 
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <li>

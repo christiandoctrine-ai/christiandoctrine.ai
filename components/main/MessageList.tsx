@@ -125,24 +125,26 @@ function MessageList({
                                           }
                                         >
                                           <p className="text-white ">
-                                            <a
-                                              className="underline text-indigo-400"
-                                              style={{ fontWeight: 'bolder' }}
-                                              href={
-                                                doc?.metadata.source.match(
-                                                  /[^\\]*$/,
-                                                )?.[0] ?? doc?.metadata.source
-                                              }
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-                                              {index + 1}. {doc.metadata.author}{' '}
-                                              ({doc.metadata.year}).{' '}
-                                              {doc.metadata.title}.{' '}
-                                              {doc.metadata.publisher}, Ch.{' '}
-                                              {/* {doc.metadata.chapter} pp.{' '} */}
-                                              {doc.metadata.page}
-                                            </a>{' '}
+                                            {doc.metadata.title ==
+                                            'World English Bible' ? (
+                                              <a
+                                                style={{ fontWeight: 'bolder' }}
+                                              >
+                                                {index + 1}. The Bible
+                                              </a>
+                                            ) : (
+                                              <a
+                                                style={{ fontWeight: 'bolder' }}
+                                              >
+                                                {index + 1}.{' '}
+                                                {doc.metadata.author} (
+                                                {doc.metadata.year}).{' '}
+                                                {doc.metadata.title}.{' '}
+                                                {doc.metadata.publisher}, Ch.{' '}
+                                                {/* {doc.metadata.chapter} pp.{' '} */}
+                                                {doc.metadata.page}
+                                              </a>
+                                            )}
                                           </p>
 
                                           <ReactMarkdown

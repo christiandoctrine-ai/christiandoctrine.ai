@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Slider = ({ setSourceNumber }: { setSourceNumber: any }) => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(2);
 
   let lsvalue: any;
   if (typeof window !== 'undefined') {
@@ -21,7 +21,7 @@ const Slider = ({ setSourceNumber }: { setSourceNumber: any }) => {
   };
 
   return (
-    <div className="my-5">
+    <div className="my-5" style={{ display: 'none' }}>
       <label className="text-xs sm:text-sm font-semibold leading-6 text-blue-400">
         Sources Number
       </label>
@@ -29,7 +29,7 @@ const Slider = ({ setSourceNumber }: { setSourceNumber: any }) => {
         <input
           type="range"
           min="1"
-          max="2"
+          max={value}
           step="1"
           value={lsvalue}
           onChange={handleChange}
@@ -51,7 +51,7 @@ const Slider = ({ setSourceNumber }: { setSourceNumber: any }) => {
             color: 'white',
           }}
         >
-          {Array.from({ length: 2 }, (_, index) => index + 1).map((step) => (
+          {Array.from({ length: 6 }, (_, index) => index + 1).map((step) => (
             <span key={step}>{step}</span>
           ))}
         </div>
