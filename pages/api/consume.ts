@@ -30,6 +30,7 @@ export default async function handler(
       userEmail: userEmail as string,
       name: namespaceName as string,
     });
+
     await newNamespace.save();
 
     // Load PDF files from the specified directory
@@ -46,6 +47,7 @@ export default async function handler(
     const textSplitter = new RecursiveCharacterTextSplitter({
       chunkSize: 1200,
       chunkOverlap: 200,
+      separators: ['”'],
     });
 
     const docs = await textSplitter.splitDocuments(rawDocs);

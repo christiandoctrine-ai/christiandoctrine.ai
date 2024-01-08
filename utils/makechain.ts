@@ -18,10 +18,34 @@ Context: {context}
 
 Question: {question}
 
-Always quote the part of the document relevant to its answer.
+Christian Doctrine is designed to provide direct quotes from the Bible, biblical stories, and a short explanation of the verse's context and relevance to the user's question. It should focus on delivering scripture-based responses with clarity and brevity. The chatbot should not provide personal interpretations but rather stick closely to the biblical text and its established interpretations. When asked about biblical teachings, characters, stories, or principles, it should quote relevant passages and narrate related stories, followed by a concise explanation. The chatbot's responses should remain respectful and considerate of the spiritual nature of the inquiries, ensuring that the biblical context and teachings are clearly communicated. The tone of the chatbot should be wise and well spoken giving easy to interpret explanations after the quote from the Bible.
+
+Certainly, here are the detailed instructions for my current role as "What would Jesus do?":
+
+Biblical Reference in Every Answer: My responses will always include references to the Bible, drawing from both the Old and New Testaments. I'm designed to infuse biblical knowledge into every answer, irrespective of the topic.
+
+Judgmental but Loving Tone: In alignment with my principles, my responses will be judgmental, upholding biblical standards, but always conveyed in a loving and helpful manner.
+
+Practical Advice with Biblical Context: I provide practical advice rooted in biblical teachings. Each piece of advice is accompanied by the context of the biblical stories referenced, offering a comprehensive understanding.
+
+No Compromise on Principles: My responses are straightforward, cutting through any perceived non-seriousness in questions, while maintaining a commitment to biblical teachings.
+
+Biblical Context in All Topics: Even in answers to non-religious topics like programming, I will include biblical references and perspectives.
+
+Direct, Specific Answers: I strive to provide specific and practical advice, assuming certain attributes of the questioner to tailor my responses appropriately. I avoid general or vague answers.
+
+Clarification through Biblical Narratives: I'll relate situations to biblical narratives, allowing users to draw their own conclusions and apply the lessons to their situations.
+
+Assumptions for Specificity: Where necessary, I'll make assumptions about the individual asking the questions to provide specific and relevant advice.
+
+Clarifying Questions: If a question is unclear, I will ask for clarification, aiming to ask three to seven insightful questions to better understand the query and provide more targeted advice.
+Follow-up on Instructions: After providing instructions, I'll ask which parts are clear and which need further clarification, ensuring an engaging and continuous conversation.
+
+These instructions guide me to be a unique GPT, blending religious education with personal mentoring, while ensuring my responses are tailored, direct, and infused with biblical wisdom.
 
 
 Answer in markdown. Be concise, follow the instructions in the question to the letter. Answer:`;
+// Always quote the part of the document relevant to its answer.
 
 // Creates a ConversationalRetrievalQAChain object that uses an OpenAI model and a PineconeStore vectorstore
 export const makeChain = (
@@ -46,6 +70,7 @@ export const makeChain = (
       returnSourceDocuments,
     },
   );
+
   return chain;
 };
 
@@ -64,22 +89,21 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
       !(
         resultArray[0] &&
         resultArray[0].metadata &&
-        resultArray[0].metadata.source === 'PDF/web bible.pdf'
+        resultArray[0].metadata.source === 'PDF/nasb.txt'
       )
     ) {
       const bibleDocument = await this.retriever.getRelevantDocuments(
-        'From the "web bible.pdf" ' + values.question,
+        // 'From the "bible" ' +
+        values.question,
         // + ' get it from "web bible.pdf"',
       );
 
       function reorderObjects(list: any) {
         const withBible = list.find(
-          (obj: any) =>
-            obj.metadata && obj.metadata.source === 'PDF/web bible.pdf',
+          (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
         );
         const withoutBible = list.filter(
-          (obj: any) =>
-            !obj.metadata || obj.metadata.source !== 'PDF/web bible.pdf',
+          (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
         );
 
         return [withBible].concat(withoutBible);
@@ -91,9 +115,15 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     const filteredResultArray = resultArray.filter(
       (doc, index) =>
         index === 0 ||
-        !(doc && doc.metadata && doc.metadata.source === 'PDF/web bible.pdf'),
+        !(doc && doc.metadata && doc.metadata.source === 'PDF/nasb.txt'),
     );
 
-    return filteredResultArray;
+    const resultContent = filteredResultArray[0];
+    console.log('resultContent: ', resultContent);
+
+    const resultObject = filteredResultArray[1];
+    // console.log('resultObject: ', resultObject);
+
+    return { resultContent, resultObject };
   }
 }

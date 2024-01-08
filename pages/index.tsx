@@ -77,18 +77,20 @@ export default function Home() {
   function mapChatMessageToMessage(chatMessage: ChatMessage): Message {
     return {
       ...chatMessage,
-      sourceDocs: chatMessage.sourceDocs?.map((doc) => ({
-        pageContent: doc.pageContent,
-        metadata: {
-          source: doc.metadata.source,
-          page_number: doc.metadata.page,
-          author: doc.metadata.author,
-          year: doc.metadata?.creationDate?.substring(2, 6),
-          title: doc.metadata.title,
-          publisher: doc.metadata.producer,
-          page: doc.metadata.page,
-        },
-      })),
+      sourceDocs: chatMessage?.sourceDocs
+        ?.filter((doc) => doc !== null)
+        .map((doc) => ({
+          pageContent: doc.pageContent,
+          metadata: {
+            source: doc.metadata.source,
+            page_number: doc.metadata.page,
+            author: doc.metadata.author,
+            year: doc.metadata?.creationDate?.substring(2, 6),
+            title: doc.metadata.title,
+            publisher: doc.metadata.producer,
+            page: doc.metadata.page,
+          },
+        })),
     };
   }
 

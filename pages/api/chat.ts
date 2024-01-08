@@ -68,27 +68,28 @@ export default async function handler(
       chat_history: history || [],
     });
 
-    // console.log('RESPONSE DATA: ', response);
+    // console.log('RESPONSE TEXT: ', response);
+    // console.log('RESPONSE SOURCES: ', response[1].sourceDocuments);
 
-    const botMessage = new Message({
-      sender: 'bot',
-      content: response[1].text.toString(),
-      chatId: chatId,
-      namespace: 'namespace',
-      userEmail: userEmail,
-      sourceDocs: response[0]
-        ? response[0].map((doc: SourceDoc) => ({
-            pageContent: doc.pageContent,
-            metadata: { source: doc.metadata.source },
-          }))
-        : [],
-    });
+    // const botMessage = new Message({
+    //   sender: 'bot',
+    //   content: response[1].text.toString(),
+    //   chatId: chatId,
+    //   namespace: 'namespace',
+    //   userEmail: userEmail,
+    //   sourceDocs: response[0]
+    //     ? response[0].map((doc: SourceDoc) => ({
+    //         pageContent: doc?.pageContent,
+    //         metadata: { source: doc?.metadata?.source },
+    //       }))
+    //     : [],
+    // });
 
-    await botMessage.save();
+    // await botMessage.save();
 
     res.status(200).json({
-      text: response[1].text,
-      sourceDocuments: response[0],
+      text: response.resultObject.text,
+      sourceDocuments: response.resultContent,
     });
   } catch (error: any) {
     console.log('error', error);

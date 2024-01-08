@@ -1,7 +1,7 @@
 import csv
 import time
 import pinecone
-from pymongo import MongoClient
+#from pymongo import MongoClient
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.document_loaders import DirectoryLoader, PyMuPDFLoader, UnstructuredURLLoader
 from langchain.vectorstores import Pinecone

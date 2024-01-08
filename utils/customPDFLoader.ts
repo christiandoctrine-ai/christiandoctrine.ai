@@ -41,9 +41,9 @@ export class CustomPDFLoader extends BufferLoader {
 
     let bibleDocument = new Document();
     let otherDocumentObjects: any = new Document({});
-    console.log(parsed?.info?.Title);
+    console.log(parsed?.info);
 
-    if (!parsed?.info?.Title.includes('bible')) {
+    if (parsed?.info?.Title !== 'World English Bible') {
       otherDocumentObjects = new Document({
         pageContent: parsed.text,
         metadata: {
@@ -52,7 +52,7 @@ export class CustomPDFLoader extends BufferLoader {
           author: parsed?.info?.Title,
           year: year,
           title: parsed?.info?.Author,
-          publisher: parsed?.info?.Producer,
+          // publisher: parsed?.info?.Producer,
           page: parsed?.numpages,
         },
       });
@@ -65,7 +65,7 @@ export class CustomPDFLoader extends BufferLoader {
           author: parsed?.info?.Title,
           year: year,
           title: parsed?.info?.Author,
-          publisher: parsed?.info?.Producer,
+          // publisher: parsed?.info?.Producer,
           page: parsed?.numpages,
         },
       });

@@ -50,22 +50,6 @@ function MessageList({
                 >
                   <div className="flex items-center justify-start max-w-full sm:max-w-4xl  mx-auto overflow-hidden px-2 sm:px-4">
                     {/* user and bot image */}
-                    {/* {message.type === 'apiMessage' ? (
-                    <div className="flex-shrink-0 p-1">
-                      <CodeBracketSquareIcon className="h-8 sm:h-10 w-8 sm:w-10 text-white rounded-full object-cover mr-2 sm:mr-3" />
-                    </div>
-                  ) : (
-                    <div className="flex-shrink-0 p-1">
-                      <Image
-                        src={userImage || '/images/user.png'}
-                        alt=""
-                        width={30}
-                        height={30}
-                        className="h-8 sm:h-10 w-8 sm:w-10 rounded-full object-cover mr-2 sm:mr-3"
-                      />
-                    </div>
-                  )} */}
-                    {/* user and bot image */}
                     <div className="flex flex-col w-full ">
                       <div className="w-full text-gray-300 p-2 sm:p-4 overflow-wrap break-words">
                         <span
@@ -79,6 +63,7 @@ function MessageList({
                             ? 'Theology Bot'
                             : userName}
                         </span>
+
                         <div className="mx-auto max-w-full">
                           <ReactMarkdown
                             linkTarget="_blank"
@@ -89,86 +74,58 @@ function MessageList({
                           </ReactMarkdown>
                         </div>
 
-                        {!message.message
+                        {message.type === 'apiMessage' &&
+                        !message.message
                           .replace(/•/g, '\n•')
                           ?.includes('Here are some verses about') ? (
-                          <Accordion
-                            type="single"
-                            collapsible
-                            className="flex flex-col"
-                          >
-                            {message.sourceDocs && (
-                              <div
-                                className="mt-4 mx-2 sm:mx-4 "
-                                key={`sourceDocsAccordion`}
-                              >
-                                <div
-                                  key={`messageSourceDocs`}
-                                  className="mb-6 px-4 py-0 sm:py-1 bg-gray-700 rounded-lg shadow-md"
+                          <>
+                            {message.sourceDocs &&
+                            message?.sourceDocs[0]?.pageContent.replace(
+                              /•/g,
+                              '\n•',
+                            ).length > 40 ? (
+                              message?.sourceDocs.map((doc, index) => (
+                                <ReactMarkdown
+                                  key={index}
+                                  linkTarget="_blank"
+                                  className="markdown pl-5 mb-5 text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed"
+                                  remarkPlugins={[remarkGfm]}
                                 >
-                                  <AccordionItem value={`item`}>
-                                    <AccordionTrigger>
-                                      <h3 className="text-xs sm:text-sm md:text-base text-white">
-                                        Sources
-                                      </h3>
-                                    </AccordionTrigger>
-                                    {message.sourceDocs[0]?.pageContent.replace(
-                                      /•/g,
-                                      '\n•',
-                                    ).length > 50 ? (
-                                      message.sourceDocs.map((doc, index) => (
-                                        <AccordionContent
-                                          key={index}
-                                          className={
-                                            'mt-2 overflow-wrap break-words index-' +
-                                            index
-                                          }
-                                        >
-                                          <p className="text-white ">
-                                            {doc.metadata.title ==
-                                            'World English Bible' ? (
-                                              <a
-                                                style={{ fontWeight: 'bolder' }}
-                                              >
-                                                {index + 1}. The Bible
-                                              </a>
-                                            ) : (
-                                              <a
-                                                style={{ fontWeight: 'bolder' }}
-                                              >
-                                                {index + 1}.{' '}
-                                                {doc.metadata.author} (
-                                                {doc.metadata.year}).{' '}
-                                                {doc.metadata.title}.{' '}
-                                                {doc.metadata.publisher}, Ch.{' '}
-                                                {/* {doc.metadata.chapter} pp.{' '} */}
-                                                {doc.metadata.page}
-                                              </a>
-                                            )}
-                                          </p>
-
-                                          <ReactMarkdown
-                                            linkTarget="_blank"
-                                            className="markdown text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed"
-                                            remarkPlugins={[remarkGfm]}
-                                          >
-                                            {doc.pageContent.replace(
-                                              /•/g,
-                                              '\n•',
-                                            )}
-                                          </ReactMarkdown>
-                                        </AccordionContent>
-                                      ))
-                                    ) : (
-                                      <p className="text-white my-5">
-                                        No sources available.
-                                      </p>
-                                    )}
-                                  </AccordionItem>
-                                </div>
-                              </div>
+                                  {' - ' +
+                                    doc?.pageContent.replace(/•/g, '\n•')}
+                                </ReactMarkdown>
+                              ))
+                            ) : (
+                              <p className="text-white my-5">
+                                No sources available.
+                              </p>
                             )}
-                          </Accordion>
+                            <p className="text-white ">
+                              <div>
+                                {/* <h3 className="mt-10 text-xs font-extrabold sm:text-sm md:text-base text-white">
+                                  {index + 1}. Title
+                                </h3> */}
+                                <h3 className="mt-5 italic text-sm text-gray-300">
+                                  Source
+                                </h3>
+                              </div>
+                              {message.sourceDocs &&
+                                message.sourceDocs.map((doc, index) => (
+                                  <h3
+                                    key={index}
+                                    className="text-xs italic sm:text-sm md:text-base text-gray-300"
+                                  >
+                                    {doc.metadata.source !== 'PDF/nasb.txt'
+                                      ? `${index + 1}. ${
+                                          doc.metadata.author
+                                        } (${doc.metadata.year}). ${
+                                          doc.metadata.title
+                                        }. ${doc.metadata.page}`
+                                      : `${index + 1}. The Bible`}
+                                  </h3>
+                                ))}
+                            </p>
+                          </>
                         ) : (
                           ''
                         )}
