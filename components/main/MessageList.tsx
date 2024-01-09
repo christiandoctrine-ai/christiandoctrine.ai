@@ -120,7 +120,7 @@ function MessageList({
                                           doc.metadata.author
                                         } (${doc.metadata.year}). ${
                                           doc.metadata.title
-                                        }. ${doc.metadata.page}`
+                                        }. ${doc.metadata.page + 1}`
                                       : `${index + 1}. The Bible`}
                                   </h3>
                                 ))}

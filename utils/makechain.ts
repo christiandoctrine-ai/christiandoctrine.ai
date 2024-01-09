@@ -84,33 +84,28 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
       ? originalResult
       : [originalResult];
 
-    // Check if the first document is "The Bible"
-    if (
-      !(
-        resultArray[0] &&
-        resultArray[0].metadata &&
-        resultArray[0].metadata.source === 'PDF/nasb.txt'
-      )
-    ) {
-      const bibleDocument = await this.retriever.getRelevantDocuments(
-        // 'From the "bible" ' +
-        values.question,
-        // + ' get it from "web bible.pdf"',
-      );
+    const bibleDocument = await this.retriever.getRelevantDocuments(
+      // 'From the "bible" ' +
+      values.question,
+      // + ' get it from "web bible.pdf"',
+    );
 
-      function reorderObjects(list: any) {
-        const withBible = list.find(
+    function reorderObjects(list: any) {
+      const withBible = list
+        .filter(
           (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
-        );
-        const withoutBible = list.filter(
+        )
+        .slice(0, 2);
+      const withoutBible = list
+        .filter(
           (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
-        );
+        )
+        .slice(0, 1);
 
-        return [withBible].concat(withoutBible);
-      }
-
-      resultArray.unshift(reorderObjects(bibleDocument).slice(0, 2));
+      return withBible.concat(withoutBible);
     }
+
+    resultArray.unshift(reorderObjects(bibleDocument).slice(0, 2));
 
     const filteredResultArray = resultArray.filter(
       (doc, index) =>
