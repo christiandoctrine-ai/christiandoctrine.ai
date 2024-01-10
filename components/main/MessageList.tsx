@@ -92,7 +92,10 @@ function MessageList({
                                   remarkPlugins={[remarkGfm]}
                                 >
                                   {' - ' +
-                                    doc?.pageContent.replace(/•/g, '\n•')}
+                                    doc?.pageContent
+                                      .replace(/•/g, '\n•')
+                                      .replace(/\n/g, '') +
+                                    '.'}
                                 </ReactMarkdown>
                               ))
                             ) : (

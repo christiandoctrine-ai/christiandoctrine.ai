@@ -95,7 +95,7 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
         .filter(
           (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
         )
-        .slice(0, 2);
+        .slice(0, 1);
       const withoutBible = list
         .filter(
           (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
@@ -106,6 +106,7 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     }
 
     resultArray.unshift(reorderObjects(bibleDocument).slice(0, 2));
+    // console.log(resultArray);
 
     const filteredResultArray = resultArray.filter(
       (doc, index) =>
@@ -114,7 +115,7 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     );
 
     const resultContent = filteredResultArray[0];
-    console.log('resultContent: ', resultContent);
+    // console.log('resultContent: ', resultContent);
 
     const resultObject = filteredResultArray[1];
     // console.log('resultObject: ', resultObject);
