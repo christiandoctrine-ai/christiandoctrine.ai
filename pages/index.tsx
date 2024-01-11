@@ -210,8 +210,6 @@ export default function Home() {
       if (data.error) {
         setError(data.error);
       } else {
-        console.log(data.sourceDocuments);
-
         setMessageState((state) => ({
           ...state,
           messages: [

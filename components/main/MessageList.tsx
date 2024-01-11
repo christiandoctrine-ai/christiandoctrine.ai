@@ -94,7 +94,8 @@ function MessageList({
                                   {' - ' +
                                     doc?.pageContent
                                       .replace(/•/g, '\n•')
-                                      .replace(/\n/g, '') +
+                                      .replace(/(\d+)\s+\1\./g, '$1.') // Remove duplicate numbers
+                                      .replace(/\n(?!\d)/g, ' ') +
                                     '.'}
                                 </ReactMarkdown>
                               ))

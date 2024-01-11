@@ -106,7 +106,7 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     }
 
     resultArray.unshift(reorderObjects(bibleDocument).slice(0, 2));
-    // console.log(resultArray);
+    console.log(resultArray);
 
     const filteredResultArray = resultArray.filter(
       (doc, index) =>
