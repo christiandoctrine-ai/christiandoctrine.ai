@@ -75,8 +75,8 @@ function MessageList({
                         </div>
 
                         {message.type === 'apiMessage' &&
-                        !message.message
-                          .replace(/•/g, '\n•')
+                        !message?.message
+                          ?.replace(/•/g, '\n•')
                           ?.includes('Here are some verses about') ? (
                           <>
                             {message.sourceDocs &&

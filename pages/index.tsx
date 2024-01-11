@@ -35,7 +35,7 @@ export default function Home() {
   // if (typeof window !== 'undefined') {
   //   lsvalue = 6; //localStorage.getItem('sourceNumber');
   // }
-  const [sourceNumber, setSourceNumber] = useState(10);
+  const [sourceNumber, setSourceNumber] = useState(2);
   const [returnSourceDocuments, setReturnSourceDocuments] =
     useState<boolean>(true);
   const [modelTemperature, setModelTemperature] = useState<number>(0.1);

@@ -90,23 +90,23 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
       // + ' get it from "web bible.pdf"',
     );
 
-    function reorderObjects(list: any) {
-      const withBible = list
-        .filter(
-          (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
-        )
-        .slice(0, 1);
-      const withoutBible = list
-        .filter(
-          (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
-        )
-        .slice(0, 1);
+    // function reorderObjects(list: any) {
+    //   const withBible = list
+    //     .filter(
+    //       (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
+    //     )
+    //     .slice(0, 2);
+    //   const withoutBible = list
+    //     .filter(
+    //       (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
+    //     )
+    //     .slice(0, 1);
 
-      return withBible.concat(withoutBible);
-    }
+    //   return withBible.concat(withoutBible);
+    // }
 
-    resultArray.unshift(reorderObjects(bibleDocument).slice(0, 2));
-    console.log(resultArray);
+    resultArray.unshift(bibleDocument.slice(0, 2));
+    // console.log(resultArray);
 
     const filteredResultArray = resultArray.filter(
       (doc, index) =>
@@ -114,12 +114,12 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
         !(doc && doc.metadata && doc.metadata.source === 'PDF/nasb.txt'),
     );
 
-    const resultContent = filteredResultArray[0];
-    // console.log('resultContent: ', resultContent);
+    // const resultContent = resultArray[0];
+    // console.log('resultContent: ', resultArray);
 
-    const resultObject = filteredResultArray[1];
+    // const resultObject = resultArray[1];
     // console.log('resultObject: ', resultObject);
 
-    return { resultContent, resultObject };
+    return resultArray;
   }
 }
