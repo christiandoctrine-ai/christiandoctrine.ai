@@ -85,19 +85,24 @@ function MessageList({
                               '\n•',
                             ).length > 40 ? (
                               message?.sourceDocs.map((doc, index) => (
-                                <ReactMarkdown
-                                  key={index}
-                                  linkTarget="_blank"
-                                  className="markdown pl-5 mb-5 text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed"
-                                  remarkPlugins={[remarkGfm]}
-                                >
-                                  {' - ' +
-                                    doc?.pageContent
-                                      .replace(/•/g, '\n•')
-                                      .replace(/(\d+)\s+\1\./g, '$1.') // Remove duplicate numbers
-                                      .replace(/\n(?!\d)/g, ' ') +
-                                    '.'}
-                                </ReactMarkdown>
+                                <div key={index}>
+                                  <span className="font-bold">
+                                    Here&apos;s what Wayne Grudem has to say
+                                    about this topic :
+                                  </span>
+                                  <ReactMarkdown
+                                    linkTarget="_blank"
+                                    className="markdown pl-5 mb-5 text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed"
+                                    remarkPlugins={[remarkGfm]}
+                                  >
+                                    {' - ' +
+                                      doc?.pageContent
+                                        .replace(/•/g, '\n•')
+                                        .replace(/(\d+)\s+\1\./g, '$1.') // Remove duplicate numbers
+                                        .replace(/\n(?!\d)/g, ' ') +
+                                      '.'}
+                                  </ReactMarkdown>
+                                </div>
                               ))
                             ) : (
                               <p className="text-white my-5">
