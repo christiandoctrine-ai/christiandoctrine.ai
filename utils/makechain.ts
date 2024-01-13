@@ -79,6 +79,8 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     // Run the original _call method
     const originalResult = await super._call(values);
 
+    console.log(originalResult.sourceDocuments);
+
     // Ensure originalResult is an array
     const resultArray = Array.isArray(originalResult)
       ? originalResult
@@ -105,7 +107,7 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     //   return withBible.concat(withoutBible);
     // }
 
-    resultArray.unshift(bibleDocument.slice(0, 2));
+    resultArray.unshift(bibleDocument.slice(0, 1));
     // console.log(resultArray);
 
     const filteredResultArray = resultArray.filter(

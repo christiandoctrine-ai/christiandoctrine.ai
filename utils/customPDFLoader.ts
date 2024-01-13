@@ -39,39 +39,38 @@ export class CustomPDFLoader extends BufferLoader {
     const parsed = await pdf(raw);
     const year = parsed?.info?.CreationDate.substring(2, 6);
 
-    let bibleDocument = new Document();
     let otherDocumentObjects: any = new Document({});
     console.log(parsed?.info);
 
-    if (parsed?.info?.Title !== 'World English Bible') {
-      otherDocumentObjects = new Document({
-        pageContent: parsed.text,
-        metadata: {
-          // Set the source as the file path
-          pdf_numpages: parsed.numpages,
-          author: parsed?.info?.Title,
-          year: year,
-          title: parsed?.info?.Author,
-          // publisher: parsed?.info?.Producer,
-          page: parsed?.numpages,
-        },
-      });
-    } else {
-      bibleDocument = new Document({
-        pageContent: parsed.text,
-        metadata: {
-          ...metadata,
-          pdf_numpages: parsed.numpages,
-          author: parsed?.info?.Title,
-          year: year,
-          title: parsed?.info?.Author,
-          // publisher: parsed?.info?.Producer,
-          page: parsed?.numpages,
-        },
-      });
-    }
+    // if (parsed?.info?.Title !== 'World English Bible') {
+    //   otherDocumentObjects = new Document({
+    //     pageContent: parsed.text,
+    //     metadata: {
+    //       // Set the source as the file path
+    //       pdf_numpages: parsed.numpages,
+    //       author: parsed?.info?.Title,
+    //       year: year,
+    //       title: parsed?.info?.Author,
+    //       // publisher: parsed?.info?.Producer,
+    //       page: parsed?.numpages,
+    //     },
+    //   });
+    // } else {
+    let bibleDocument = new Document({
+      pageContent: parsed.text,
+      metadata: {
+        ...metadata,
+        pdf_numpages: parsed.numpages,
+        author: parsed?.info?.Title,
+        year: year,
+        title: parsed?.info?.Author,
+        // publisher: parsed?.info?.Producer,
+        page: parsed?.numpages,
+      },
+    });
+    // }
 
-    return [bibleDocument, otherDocumentObjects];
+    return [bibleDocument];
   }
 }
 
