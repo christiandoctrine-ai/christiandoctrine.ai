@@ -79,8 +79,6 @@ class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChai
     // Run the original _call method
     const originalResult = await super._call(values);
 
-    console.log(originalResult.sourceDocuments);
-
     // Ensure originalResult is an array
     const resultArray = Array.isArray(originalResult)
       ? originalResult

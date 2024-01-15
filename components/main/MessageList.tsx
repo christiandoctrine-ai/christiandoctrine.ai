@@ -116,20 +116,24 @@ function MessageList({
                                 </h3>
                               </div>
                               {message.sourceDocs &&
-                                message.sourceDocs.map((doc, index) => (
-                                  <h3
-                                    key={index}
-                                    className="text-xs italic sm:text-sm md:text-base text-gray-300"
-                                  >
-                                    {doc.metadata.source !== 'PDF/nasb.txt'
-                                      ? `${index + 1}. ${
-                                          doc.metadata.author
-                                        } (${doc.metadata.year}). ${
-                                          doc.metadata.title
-                                        }. ${doc.metadata.page + 1}`
-                                      : `${index + 1}. The Bible`}
-                                  </h3>
-                                ))}
+                                message.sourceDocs.map((doc, index) => {
+                                  // Remove "PDF/" from the string
+                                  let formatSource =
+                                    doc.metadata.source.includes('PDF/')
+                                      ? doc.metadata.source.replace('PDF/', '')
+                                      : '';
+
+                                  // Remove ".txt" from the string
+                                  let result = formatSource.replace('.txt', '');
+                                  return (
+                                    <h3
+                                      key={index}
+                                      className="text-xs italic sm:text-sm md:text-base text-gray-300"
+                                    >
+                                      {index + 1}. {result}
+                                    </h3>
+                                  );
+                                })}
                             </p>
                           </>
                         ) : (
