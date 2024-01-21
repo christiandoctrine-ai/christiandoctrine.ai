@@ -117,7 +117,8 @@ function MessageList({
                               </div>
                               {message.sourceDocs &&
                                 message.sourceDocs.map((doc, index) => {
-                                  // Remove "PDF/" from the string
+                                  // Extracting author and title information
+
                                   let formatSource =
                                     doc.metadata.source.includes('PDF/')
                                       ? doc.metadata.source.replace('PDF/', '')
@@ -125,12 +126,26 @@ function MessageList({
 
                                   // Remove ".txt" from the string
                                   let result = formatSource.replace('.txt', '');
+                                  let sourceParts = result.split(' - ');
+                                  let author =
+                                    sourceParts.length > 1
+                                      ? sourceParts[1]
+                                      : '';
+                                  let title = sourceParts[0];
+
+                                  // Reformatting the string
+                                  let formattedString = `${
+                                    index + 1
+                                  }. ${author}, ${title}`;
+
                                   return (
                                     <h3
                                       key={index}
                                       className="text-xs italic sm:text-sm md:text-base text-gray-300"
                                     >
-                                      {index + 1}. {result}
+                                      {index + 1} Grudem, Wayne (1994).
+                                      Systematic Theology: An Introduction to
+                                      Biblical Doctrine.
                                     </h3>
                                   );
                                 })}
