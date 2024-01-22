@@ -143,7 +143,7 @@ function MessageList({
                                       key={index}
                                       className="text-xs italic sm:text-sm md:text-base text-gray-300"
                                     >
-                                      {index + 1} Grudem, Wayne (1994).
+                                      {index + 1}. Grudem, Wayne (1994).
                                       Systematic Theology: An Introduction to
                                       Biblical Doctrine.
                                     </h3>
