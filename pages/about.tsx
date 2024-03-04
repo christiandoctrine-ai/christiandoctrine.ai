@@ -17,14 +17,14 @@ export default function About() {
             </h2>
 
             <div className="sm:mt-6 text-sm sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
-              Our vision is to make the bible and theology more accessible in
-              order to facilitate vibrant discussions within church communities.
-              This AI chatbot is in beta and should not be viewed as an
-              authoritative source.
+              Our vision is to facilitate vibrant discussions within church communities by making theology more accessible. As people learn about more about theology, we hope they discuss the concepts inside a local church context.
+              This chatbot distinguishes itself from chatgpt in that sources are curated and temperature is set intentionally low. Therefore the curious won't get hallucinations (incorrect information) or answers referencing non-canonical sources. 
+              However this AI chatbot is in beta and should not be viewed as an
+              authoritative. We've also started with one source but hope to expand to more in the future. 
             </div>
 
             <h2 className="mt-24 text-xl text-center sm:text-3xl sm:text-left font-bold text-white">
-              Sources
+              Source:
             </h2>
             <ul>
               <li className="ml-5 text-xs underline sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
@@ -33,14 +33,6 @@ export default function About() {
                   href="https://drive.google.com/file/d/1Y6_IIkNdQhnBMBDzwo1aHnmmEk6C5893/view?usp=drive_link"
                 >
                   • Systematic Theology by Wayne Grudem (1994)
-                </a>
-              </li>
-              <li className="ml-5 text-xs underline sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
-                <a
-                  target="_blank"
-                  href="https://drive.google.com/file/d/1Yv2R5JDfjT2coUVHuBgfM_uBa_m9WpyQ/view?usp=drive_link"
-                >
-                  • World English Bible
                 </a>
               </li>
             </ul>
