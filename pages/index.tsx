@@ -161,7 +161,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetchChatHistory();
+    if (selectedChatId) {
+      fetchChatHistory();
+    }
   }, [chatId, fetchChatHistory]);
 
   async function handleSubmit(e: any) {
