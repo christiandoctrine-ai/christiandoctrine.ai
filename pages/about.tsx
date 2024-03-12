@@ -8,7 +8,7 @@ export default function About() {
       <Head>
         <title>About Us</title>
       </Head>
-      <Navbar />
+      <Navbar about={true} />
       <div className="relative isolate min-h-screen bg-gray-900 flex justify-center">
         <div className="mx-auto flex justify-center max-w-7xl ">
           <div className="relative px-6 pb-20 pt-24  sm:pt-32 lg:static lg:px-8 lg:py-48">

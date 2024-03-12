@@ -11,23 +11,17 @@ export default function Navbar({ about }: any) {
         {!about ? (
           ''
         ) : (
-          <a
-            className="font-medium text-lg text-white hover:text-gray-400 dark:text-white dark:hover:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-[0.7s]"
-            href="#"
-          >
+          <div className="font-medium text-lg text-white hover:text-gray-400 dark:text-white dark:hover:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-[0.7s]">
             <Link href={'/'}>Home</Link>
-          </a>
+          </div>
         )}
         {about ? (
           ''
         ) : (
           <div className="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:ps-5">
-            <a
-              className="font-medium text-lg text-white hover:text-gray-400 dark:text-white dark:hover:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-[0.7s]"
-              href="#"
-            >
+            <div className="font-medium text-lg text-white hover:text-gray-400 dark:text-white dark:hover:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 transition-[0.7s]">
               <Link href={'/about'}>About</Link>
-            </a>
+            </div>
           </div>
         )}
       </nav>
