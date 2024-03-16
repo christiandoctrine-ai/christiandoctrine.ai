@@ -22,11 +22,11 @@ export default function About() {
               about more about theology, we hope they discuss the concepts
               inside a local church context. This chatbot distinguishes itself
               from chatgpt in that sources are curated and temperature is set
-              intentionally low. Therefore the curious won't get hallucinations
-              (incorrect information) or answers referencing non-canonical
-              sources. However this AI chatbot is in beta and should not be
-              viewed as an authoritative. We've also started with one source but
-              hope to expand to more in the future.
+              intentionally low. Therefore the curious won&#39;t get
+              hallucinations (incorrect information) or answers referencing
+              non-canonical sources. However this AI chatbot is in beta and
+              should not be viewed as an authoritative. We&#39;ve also started
+              with one source but hope to expand to more in the future.
             </div>
 
             <h2 className="mt-24 text-xl text-center sm:text-3xl sm:text-left font-bold text-white">
