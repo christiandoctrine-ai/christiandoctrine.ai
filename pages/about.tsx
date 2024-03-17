@@ -18,18 +18,19 @@ export default function About() {
 
             <div className="sm:mt-6 text-sm sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
               Our vision is to facilitate vibrant discussions within church
-              communities by making theology more accessible. As people learn about more about theology, we hope they discuss the concepts
-              inside a local church context. 
+              communities by making theology more accessible. As people learn more about theology, our hope is that they discuss the concepts
+              with their local church.
             </div>
             <div className="sm:mt-6 text-sm sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
-              This chatbot distinguishes itself from chatgpt in that sources are curated and temperature is set
-              intentionally low. Therefore the curious won&#39;t get
-              hallucinations (incorrect information) or answers referencing
-              non-canonical sources. 
+              This chatbot distinguishes itself from chatgpt in two ways. First, the chatbot uses sources that are carefully curated
+              instead of referencing the entire internet. Second, the temperature of the chatbot is set intentionally low which 
+              significantly reduces hallucinations (fabricated information). In this way, the answers are designed to reference 
+              canonical sources. 
             </div>
             <div className="sm:mt-6 text-sm sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">  
               However this AI chatbot is in beta and should not be viewed as an authoritative. We&#39;ve also started
-              with one source but hope to expand to more in the future.
+              with one source but hope to expand to more in the future. If you have any feedback, please share it 
+              by contacting us below.
             </div>
 
             <h2 className="mt-24 text-xl text-center sm:text-3xl sm:text-left font-bold text-white">
