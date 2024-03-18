@@ -3,6 +3,7 @@ import type { AppProps as NextAppProps } from 'next/app';
 import { Session } from 'next-auth';
 import { Inter } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
+import { Analytics } from '@vercel/analytics/react';
 
 type AppProps = NextAppProps & {
   session: Session;
@@ -15,11 +16,14 @@ const inter = Inter({
 
 function MyApp({ Component, pageProps, session }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <main className={inter.variable}>
-        <Component {...pageProps} />
-      </main>
-    </SessionProvider>
+    <>
+      <SessionProvider session={session}>
+        <main className={inter.variable}>
+          <Component {...pageProps} />
+        </main>
+      </SessionProvider>
+      <Analytics />
+    </>
   );
 }
 
