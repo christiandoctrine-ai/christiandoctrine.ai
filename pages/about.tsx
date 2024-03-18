@@ -40,7 +40,7 @@ export default function About() {
               <li className="ml-5 text-xs underline sm:text-lg leading-6 sm:leading-8 text-gray-300 my-5">
                 <a
                   target="_blank"
-                  href="https://drive.google.com/file/d/1Y6_IIkNdQhnBMBDzwo1aHnmmEk6C5893/view?usp=drive_link"
+                  href="https://archive.org/stream/WayneGrudemSystematicTheology/Wayne%20Grudem%20-%20Systematic%20Theology_djvu.txt"
                 >
                   • Systematic Theology by Wayne Grudem (1994)
                 </a>
