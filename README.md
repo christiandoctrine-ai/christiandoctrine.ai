@@ -26,7 +26,7 @@ Convert your documents, which could be PDFs, Word docs, etc. to plain text. This
 You need to split the large text into smaller chunks, typically around 200-2000 characters. This is because the model has a maximum context length limit.
 You can split the text into chunks using:
 
-- Regular expressions to match newline characters
+- Regular expressions to match new line characters
 - Fixed length chunks of a certain number of characters
 
 #### Embed the text into vectors
