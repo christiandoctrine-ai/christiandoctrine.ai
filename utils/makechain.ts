@@ -1,7 +1,7 @@
 import { OpenAI } from '@langchain/openai';
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
-import { ConversationalRetrievalQAChain } from 'langchain/chains';
-import { ChainValues } from 'langchain/schema';
+import { ConversationalRetrievalQAChain } from '@langchain/community/chains';
+import { ChainValues } from '@langchain/core/utils';
 
 const CONDENSE_PROMPT = `Condense the chat history and the follow-up question into a standalone question. 
 
@@ -76,19 +76,23 @@ export const makeChain = (
 
 class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChain {
   async _call(values: ChainValues): Promise<ChainValues> {
-    // Run the original _call method
-    const originalResult = await super._call(values);
+  const originalResult = await super._call(values);
 
-    // Ensure originalResult is an array
-    const resultArray = Array.isArray(originalResult)
-      ? originalResult
-      : [originalResult];
+  const bibleDocument = await this.retriever.getRelevantDocuments(values.question);
+  const originalDocs = (originalResult.sourceDocuments || []) as Document[];
 
-    const bibleDocument = await this.retriever.getRelevantDocuments(
-      // 'From the "bible" ' +
-      values.question,
-      // + ' get it from "web bible.pdf"',
-    );
+  const combinedDocs = [
+    ...bibleDocument.slice(0, 1),
+    ...originalDocs.filter(
+      (doc) => !(doc.metadata?.source === 'PDF/nasb.txt')
+    ),
+  ];
+
+  return {
+    ...originalResult,
+    sourceDocuments: combinedDocs,
+  };
+}
 
     // function reorderObjects(list: any) {
     //   const withBible = list
