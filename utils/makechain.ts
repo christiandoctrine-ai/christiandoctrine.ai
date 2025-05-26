@@ -1,7 +1,7 @@
 import { OpenAI } from '@langchain/openai';
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
-import { ChainValues } from '@langchain/core/utils';
+import { ChainValues } from '@langchain/core/schema';
 
 const CONDENSE_PROMPT = `Condense the chat history and the follow-up question into a standalone question. 
 
