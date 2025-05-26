@@ -1,4 +1,4 @@
-import { OpenAI } from 'langchain/openai';
+import { OpenAI } from '@langchain/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
 import { ChainValues } from 'langchain/schema';
