@@ -1,6 +1,6 @@
-import { Document } from 'langchain/document';
+import { Document } from 'langchain/core/documents';
 import { readFile } from 'fs/promises';
-import { BaseDocumentLoader } from 'langchain/document_loaders';
+import { BaseDocumentLoader } from '@langchain/community/document_loaders/base';
 import * as fs from 'fs/promises';
 import path from 'path';
 import { TextSplitter } from 'langchain/text_splitter';
@@ -30,7 +30,6 @@ export abstract class BufferLoader extends BaseDocumentLoader {
     return this.parse(buffer, metadata);
   }
 
-  // Add loadAndSplit to the abstract base so all loaders can inherit
   public async loadAndSplit(splitter: TextSplitter): Promise<Document[]> {
     const docs = await this.load();
     return splitter.splitDocuments(docs);
@@ -46,7 +45,6 @@ export class CustomPDFLoader extends BufferLoader {
     const parsed = await pdf(raw);
     const year = parsed?.info?.CreationDate?.substring(2, 6);
 
-    // Always create the document with metadata
     let bibleDocument = new Document({
       pageContent: parsed.text,
       metadata: {
@@ -65,7 +63,6 @@ export class CustomPDFLoader extends BufferLoader {
 
 async function PDFLoaderImports() {
   try {
-    // the main entrypoint has some debug code that we don't want to import
     const { default: pdf } = await import('pdf-parse/lib/pdf-parse.js');
     return { pdf };
   } catch (e) {
