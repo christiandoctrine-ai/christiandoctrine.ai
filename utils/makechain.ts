@@ -56,7 +56,7 @@ export const makeChain = (
 ) => {
   const model = new OpenAI({
     temperature: modelTemperature, // increase temperature to get more creative answers
-    modelName: 'gpt-3.5-turbo-16k',
+    modelName: 'gpt-3.5-turbo',
     maxTokens: 2048,
   });
 
