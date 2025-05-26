@@ -23,7 +23,7 @@ The first step is to actually convert the text into vectors using an embedding m
 Convert your documents, which could be PDFs, Word docs, etc. to plain text. This ensures the text can be processed by the model.
 
 #### Split the text into chunks
-You need to split the large text into smaller chunks, typically around 200-2000 characters. This is because the model has a maximum context length limit.
+You need to split the large text into smaller chunks, typically around 200-2000 characters. This is because the model has a max context length limit.
 You can split the text into chunks using:
 
 - Regular expressions to match new line characters
