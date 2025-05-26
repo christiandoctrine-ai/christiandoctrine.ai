@@ -1,8 +1,8 @@
-import { RecursiveCharacterTextSplitter } from '@langchain/community/text_splitter'; // ✅ moved
-import { OpenAIEmbeddings } from '@langchain/openai'; // ✅ stays the same
-import { PineconeStore } from '@langchain/community/vectorstores/pinecone'; // ✅ stays the same
-import { pinecone } from '@/utils/pinecone-client'; // ✅ your file
-import { CustomPDFLoader } from '@/utils/customPDFLoader'; // ✅ your file
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { OpenAIEmbeddings } from '@langchain/openai'; 
+import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
+import { pinecone } from '@/utils/pinecone-client'; 
+import { CustomPDFLoader } from '@/utils/customPDFLoader'; 
 
 // 🔁 Moved from `langchain/...` to `@langchain/community/...`
 import { DirectoryLoader } from '@langchain/community/document_loaders/fs/directory';
@@ -10,10 +10,10 @@ import { DocxLoader } from '@langchain/community/document_loaders/fs/docx';
 import { TextLoader } from '@langchain/community/document_loaders/fs/text';
 import { CSVLoader } from '@langchain/community/document_loaders/fs/csv';
 
-import { NextApiRequest, NextApiResponse } from 'next'; // ✅ stays the same
-import fs from 'fs'; // ✅ stays the same
-import Namespace from '@/models/Namespace'; // ✅ your file
-import connectDB from '@/utils/mongoConnection'; // ✅ your file
+import { NextApiRequest, NextApiResponse } from 'next'; 
+import fs from 'fs'; 
+import Namespace from '@/models/Namespace'; 
+import connectDB from '@/utils/mongoConnection'; 
 
 const filePath = process.env.NODE_ENV === 'production' ? '/tmp' : 'tmp';
 
