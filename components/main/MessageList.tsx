@@ -66,11 +66,17 @@ function MessageList({
 
                         <div className="mx-auto max-w-full">
                           <ReactMarkdown
-                            linkTarget="_blank"
-                            className="markdown text-xs sm:text-sm md:text-base leading-relaxed"
-                            remarkPlugins={[remarkGfm]}
-                          >
-                            {message.message}
+                              className="markdown text-xs sm:text-sm md:text-base leading-relaxed"
+                              remarkPlugins={[remarkGfm]}
+                              components={{
+                                a: ({ node, ...props }) => (
+                                  <a {...props} target="_blank" rel="noopener noreferrer">
+                                    {props.children}
+                                  </a>
+                                ),
+                              }}
+                            >
+                              {message.message}
                           </ReactMarkdown>
                         </div>
 
