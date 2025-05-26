@@ -3,6 +3,7 @@ import { readFile } from 'fs/promises';
 import { BaseDocumentLoader } from 'langchain/document_loaders';
 import * as fs from 'fs/promises';
 import path from 'path';
+import { TextSplitter } from 'langchain/text_splitter';
 
 export abstract class BufferLoader extends BaseDocumentLoader {
   constructor(public filePathOrBlob: string | Blob) {
@@ -28,6 +29,12 @@ export abstract class BufferLoader extends BaseDocumentLoader {
     }
     return this.parse(buffer, metadata);
   }
+
+  // Add loadAndSplit to the abstract base so all loaders can inherit
+  public async loadAndSplit(splitter: TextSplitter): Promise<Document[]> {
+    const docs = await this.load();
+    return splitter.splitDocuments(docs);
+  }
 }
 
 export class CustomPDFLoader extends BufferLoader {
@@ -37,25 +44,9 @@ export class CustomPDFLoader extends BufferLoader {
   ): Promise<Document[]> {
     const { pdf } = await PDFLoaderImports();
     const parsed = await pdf(raw);
-    const year = parsed?.info?.CreationDate.substring(2, 6);
+    const year = parsed?.info?.CreationDate?.substring(2, 6);
 
-    let otherDocumentObjects: any = new Document({});
-    console.log(parsed?.info);
-
-    // if (parsed?.info?.Title !== 'World English Bible') {
-    //   otherDocumentObjects = new Document({
-    //     pageContent: parsed.text,
-    //     metadata: {
-    //       // Set the source as the file path
-    //       pdf_numpages: parsed.numpages,
-    //       author: parsed?.info?.Title,
-    //       year: year,
-    //       title: parsed?.info?.Author,
-    //       // publisher: parsed?.info?.Producer,
-    //       page: parsed?.numpages,
-    //     },
-    //   });
-    // } else {
+    // Always create the document with metadata
     let bibleDocument = new Document({
       pageContent: parsed.text,
       metadata: {
@@ -64,11 +55,9 @@ export class CustomPDFLoader extends BufferLoader {
         author: parsed?.info?.Title,
         year: year,
         title: parsed?.info?.Author,
-        // publisher: parsed?.info?.Producer,
         page: parsed?.numpages,
       },
     });
-    // }
 
     return [bibleDocument];
   }
