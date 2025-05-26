@@ -1,6 +1,6 @@
 import { Document } from 'langchain/document'; 
 import { readFile } from 'fs/promises';
-import { BaseDocumentLoader } from '@langchain/community/document_loaders/base'; 
+import { BaseDocumentLoader } from 'langchain/document_loaders/base';
 import * as fs from 'fs/promises';
 import path from 'path';
 import { TextSplitter } from 'langchain/text_splitter';
