@@ -1,4 +1,4 @@
-import { Document } from 'langchain/core/documents';
+import { Document } from '@langchain/core/documents';
 import { readFile } from 'fs/promises';
 import { BaseDocumentLoader } from '@langchain/community/document_loaders/base';
 import * as fs from 'fs/promises';
