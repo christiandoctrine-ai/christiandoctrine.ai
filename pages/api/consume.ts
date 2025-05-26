@@ -1,4 +1,4 @@
-import { RecursiveCharacterTextSplitter } from '@langchain/community/text_splitter/RecursiveCharacterTextSplitter.js';
+import { RecursiveCharacterTextSplitter } from '@langchain/core/text_splitter';
 import { OpenAIEmbeddings } from '@langchain/openai'; 
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone'; 
 import { pinecone } from '@/utils/pinecone-client'; 
