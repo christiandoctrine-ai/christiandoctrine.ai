@@ -1,16 +1,18 @@
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { PineconeStore } from 'langchain/vectorstores/pinecone';
-import { pinecone } from '@/utils/pinecone-client';
+import { OpenAIEmbeddings } from '@langchain/openai'; 
+import { PineconeStore } from '@langchain/community/vectorstores/pinecone'; 
+import { pinecone } from '@/utils/pinecone-client'; 
 import { CustomPDFLoader } from '@/utils/customPDFLoader';
+
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
-import { DocxLoader } from 'langchain/document_loaders/fs/docx';
+import { DocxLoader } from '@langchain/community/document_loaders/fs/docx';
 import { TextLoader } from 'langchain/document_loaders/fs/text';
-import { CSVLoader } from 'langchain/document_loaders/fs/csv';
-import { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs';
-import Namespace from '@/models/Namespace';
-import connectDB from '@/utils/mongoConnection';
+import { CSVLoader } from '@langchain/community/document_loaders/fs/csv';
+
+import { NextApiRequest, NextApiResponse } from 'next'; 
+import fs from 'fs'; 
+import Namespace from '@/models/Namespace'; 
+import connectDB from '@/utils/mongoConnection'; 
 
 const filePath = process.env.NODE_ENV === 'production' ? '/tmp' : 'tmp';
 

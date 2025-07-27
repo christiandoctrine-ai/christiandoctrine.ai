@@ -120,7 +120,7 @@ export default function Home() {
 
       setMessageState((state) => ({
         ...state,
-        messages: data.map((message: any) => ({
+        messages: (Array.isArray(data) ? data : []).map((message: any) => ({
           type: message.sender === 'user' ? 'userMessage' : 'apiMessage',
           message: message.content,
           sourceDocs: message.sourceDocs?.map((doc: any) => ({

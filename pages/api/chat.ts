@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { PineconeStore } from 'langchain/vectorstores/pinecone';
+import { OpenAIEmbeddings } from '@langchain/openai';
+import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
 import { makeChain } from '@/utils/makechain';
 import { pinecone } from '@/utils/pinecone-client';
 import connectDB from '@/utils/mongoConnection';

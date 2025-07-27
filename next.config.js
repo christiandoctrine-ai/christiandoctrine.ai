@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   webpack(config) {
-    config.experiments = { ...config.experiments, topLevelAwait: true, asyncWebAssembly: true, layers: true };
+    config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
   images: {
@@ -11,4 +11,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
