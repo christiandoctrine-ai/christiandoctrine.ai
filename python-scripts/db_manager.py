@@ -7,18 +7,20 @@ from langchain.document_loaders import DirectoryLoader, PyMuPDFLoader, Unstructu
 from langchain.vectorstores import Pinecone
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+import os
+
 # Constants
-pinecone_api_key = 'c4a952ce-7672-4a81-b6ef-f6f7a5fb487a'
-environment = 'gcp-starter'
-index_name = 'christiandoctrine-ai'
+pinecone_api_key = os.getenv('PINECONE_API_KEY')
+environment = os.getenv('PINECONE_ENVIRONMENT', 'gcp-starter')
+index_name = os.getenv('PINECONE_INDEX_NAME', 'christiandoctrine-ai')
 dimension = 1536
 metric = 'cosine'
 pod_type = 'p2.x1'
-openai_api_key = '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'
+openai_api_key = os.getenv('OPENAI_API_KEY')
 pdf_directory = 'PDF'
 csvfile = ''
-uri = 'mongodb+srv://infotimechainllc:LyvbHdkhaqr2dAmH@cluster0.s1sfoen.mongodb.net/?retryWrites=true&w=majority'
-db_name = 'test'
+uri = os.getenv('MONGODB_URI')
+db_name = os.getenv('MONGODB_DB_NAME', 'test')
 
 
 # Helper function for confirmation
