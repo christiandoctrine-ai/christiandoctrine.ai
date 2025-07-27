@@ -6,6 +6,7 @@ import { pinecone } from '@/utils/pinecone-client';
 import connectDB from '@/utils/mongoConnection';
 import Message from '@/models/Message';
 import { SourceDoc } from '@/types';
+import { HumanMessage, AIMessage } from '@langchain/core/messages';
 
 export default async function handler(
   req: NextApiRequest,
@@ -57,6 +58,12 @@ export default async function handler(
 
     await userMessage.save();
 
+    // Convert history from [string, string][] to proper message format
+    const formattedHistory = (history || []).flatMap(([human, ai]: [string, string]) => [
+      new HumanMessage(human),
+      new AIMessage(ai),
+    ]);
+
     const chain = makeChain(
       vectorStore,
       returnSourceDocuments,
@@ -65,7 +72,7 @@ export default async function handler(
     );
     const response = await chain.call({
       question: sanitizedQuestion,
-      chat_history: history || [],
+      chat_history: formattedHistory,
     });
 
     // console.log('RESPONSE TEXT: ', response);
