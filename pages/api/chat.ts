@@ -75,17 +75,20 @@ export default async function handler(
       chat_history: formattedHistory,
     });
 
-    // console.log('RESPONSE TEXT: ', response);
-    // console.log('RESPONSE SOURCES: ', response[1].sourceDocuments);
+    console.log('RESPONSE: ', response);
+
+    // Handle the response structure - it might be different with newer LangChain versions
+    const responseText = response.text || response.answer || response.result || '';
+    const sourceDocuments = response.sourceDocuments || [];
 
     const botMessage = new Message({
       sender: 'bot',
-      content: response[1].text.toString(),
+      content: responseText.toString(),
       chatId: chatId,
       namespace: 'namespace',
       userEmail: userEmail,
-      sourceDocs: response[0]
-        ? response[0].map((doc: SourceDoc) => ({
+      sourceDocs: sourceDocuments
+        ? sourceDocuments.map((doc: SourceDoc) => ({
             pageContent: doc?.pageContent,
             metadata: { source: doc?.metadata?.source },
           }))
@@ -95,8 +98,8 @@ export default async function handler(
     await botMessage.save();
 
     res.status(200).json({
-      text: response[1].text,
-      sourceDocuments: response[1].sourceDocuments,
+      text: responseText,
+      sourceDocuments: sourceDocuments,
     });
   } catch (error: any) {
     console.log('error', error);
