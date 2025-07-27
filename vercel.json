@@ -1,12 +1,7 @@
 {
   "functions": {
     "pages/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "build": {
-    "env": {
-      "ENABLE_EXPERIMENTAL_COREPACK": "0"
+      "runtime": "@vercel/node@3.0.0"
     }
   }
 }
