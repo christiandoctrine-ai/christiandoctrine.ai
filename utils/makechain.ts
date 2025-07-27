@@ -1,4 +1,4 @@
-import { OpenAI } from '@langchain/openai';
+import { ChatOpenAI } from '@langchain/openai';
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
 import { Document } from '@langchain/core/documents';
@@ -52,7 +52,7 @@ export const makeChain = (
   modelTemperature: number,
   sourceNumber: number,
 ) => {
-  const model = new OpenAI({
+  const model = new ChatOpenAI({
     temperature: modelTemperature, // increase temperature to get more creative answers
     modelName: 'gpt-3.5-turbo',
     maxTokens: 2048,
