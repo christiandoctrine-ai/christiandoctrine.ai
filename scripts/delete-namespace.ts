@@ -6,12 +6,7 @@ export const run = async () => {
 
   try {
     const index = pinecone.Index(targetIndex);
-    await index._delete({
-      deleteRequest: {
-        namespace: targetNamespace,
-        deleteAll: true,
-      },
-    });
+    await index.namespace(targetNamespace).deleteAll();
   } catch (error) {
     console.log('error', error);
     throw new Error('Failed to delete your namespace');

@@ -16,12 +16,7 @@ export default async function handler(
 
   try {
     const index = pinecone.Index(targetIndex);
-    await index._delete({
-      deleteRequest: {
-        namespace,
-        deleteAll: true,
-      },
-    });
+    await index.namespace(namespace).deleteAll();
 
     await connectDB();
     await Namespace.deleteOne({ name: namespace, userEmail });

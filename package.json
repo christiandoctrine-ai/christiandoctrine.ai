@@ -4,9 +4,11 @@
   "private": true,
   "license": "MIT",
   "author": "klaudioz",
-  "type": "module",
   "scripts": {
-    "start": "http-server -p 3000"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -15,12 +17,13 @@
     "@langchain/core": "^0.3.57",
     "@langchain/openai": "^0.5.11",
     "@microsoft/fetch-event-source": "^2.0.1",
-    "@pinecone-database/pinecone": "^0.2.0",
+    "@pinecone-database/pinecone": "^3.0.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/analytics": "^1.5.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.0",
+    "langchain": "^0.3.0",
     "d3-dsv": "^2.0.0",
     "dotenv": "^16.4.5",
     "formidable": "^3.5.0",

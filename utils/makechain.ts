@@ -1,7 +1,7 @@
 import { OpenAI } from '@langchain/openai';
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone';
-import { ConversationalRetrievalQAChain } from '@langchain/community/chains';
-import { ChainValues } from '@langchain/core/utils';
+import { ConversationalRetrievalQAChain } from 'langchain/chains';
+import { Document } from '@langchain/core/documents';
 
 const CONDENSE_PROMPT = `Condense the chat history and the follow-up question into a standalone question. 
 
@@ -43,9 +43,7 @@ Follow-up on Instructions: After providing instructions, I'll ask which parts ar
 
 These instructions guide me to be a unique GPT, blending religious education with personal mentoring, while ensuring my responses are tailored, direct, and infused with biblical wisdom.
 
-
 Answer in markdown. Be concise, follow the instructions in the question to the letter. Answer:`;
-// Always quote the part of the document relevant to its answer.
 
 // Creates a ConversationalRetrievalQAChain object that uses an OpenAI model and a PineconeStore vectorstore
 export const makeChain = (
@@ -61,7 +59,7 @@ export const makeChain = (
   });
 
   // Configures the chain to use the QA_PROMPT and CONDENSE_PROMPT prompts and to not return the source documents
-  const chain = CustomConversationalRetrievalQAChain.fromLLM(
+  const chain = ConversationalRetrievalQAChain.fromLLM(
     model,
     vectorstore.asRetriever(sourceNumber),
     {
@@ -73,57 +71,3 @@ export const makeChain = (
 
   return chain;
 };
-
-class CustomConversationalRetrievalQAChain extends ConversationalRetrievalQAChain {
-  async _call(values: ChainValues): Promise<ChainValues> {
-  const originalResult = await super._call(values);
-
-  const bibleDocument = await this.retriever.getRelevantDocuments(values.question);
-  const originalDocs = (originalResult.sourceDocuments || []) as Document[];
-
-  const combinedDocs = [
-    ...bibleDocument.slice(0, 1),
-    ...originalDocs.filter(
-      (doc) => !(doc.metadata?.source === 'PDF/nasb.txt')
-    ),
-  ];
-
-  return {
-    ...originalResult,
-    sourceDocuments: combinedDocs,
-  };
-}
-
-    // function reorderObjects(list: any) {
-    //   const withBible = list
-    //     .filter(
-    //       (obj: any) => obj.metadata && obj.metadata.source === 'PDF/nasb.txt',
-    //     )
-    //     .slice(0, 2);
-    //   const withoutBible = list
-    //     .filter(
-    //       (obj: any) => !obj.metadata || obj.metadata.source !== 'PDF/nasb.txt',
-    //     )
-    //     .slice(0, 1);
-
-    //   return withBible.concat(withoutBible);
-    // }
-
-    resultArray.unshift(bibleDocument.slice(0, 1));
-    // console.log(resultArray);
-
-    const filteredResultArray = resultArray.filter(
-      (doc, index) =>
-        index === 0 ||
-        !(doc && doc.metadata && doc.metadata.source === 'PDF/nasb.txt'),
-    );
-
-    // const resultContent = resultArray[0];
-    // console.log('resultContent: ', resultArray);
-
-    // const resultObject = resultArray[1];
-    // console.log('resultObject: ', resultObject);
-
-    return resultArray;
-  }
-}

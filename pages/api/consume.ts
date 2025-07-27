@@ -1,13 +1,13 @@
-import { RecursiveCharacterTextSplitter } from '@langchain/core/text_splitter';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { OpenAIEmbeddings } from '@langchain/openai'; 
 import { PineconeStore } from '@langchain/community/vectorstores/pinecone'; 
 import { pinecone } from '@/utils/pinecone-client'; 
-import { CustomPDFLoader } from '@/utils/customPDFLoader.js'; // make sure this is a .js file if using ESM
+import { CustomPDFLoader } from '@/utils/customPDFLoader';
 
-import { DirectoryLoader } from '@langchain/community/document_loaders/fs/directory/DirectoryLoader.js';
-import { DocxLoader } from '@langchain/community/document_loaders/fs/docx/DocxLoader.js';
-import { TextLoader } from '@langchain/community/document_loaders/fs/text/TextLoader.js';
-import { CSVLoader } from '@langchain/community/document_loaders/fs/csv/CSVLoader.js';
+import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { DocxLoader } from '@langchain/community/document_loaders/fs/docx';
+import { TextLoader } from 'langchain/document_loaders/fs/text';
+import { CSVLoader } from '@langchain/community/document_loaders/fs/csv';
 
 import { NextApiRequest, NextApiResponse } from 'next'; 
 import fs from 'fs'; 
